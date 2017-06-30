@@ -33,9 +33,7 @@ values."
    '(
      ivy
      (auto-completion :variables
-                      auto-completion-enable-snippets-in-popup t
-                      auto-completion-return-key-behavior nil
-                      auto-completion-tab-key-behavior 'complete)
+                      auto-completion-enable-snippets-in-popup t)
      ;; better-defaults
      emacs-lisp
      evil-commentary
@@ -314,6 +312,18 @@ before packages are loaded. If you are unsure, you should try in setting them in
    web-mode-css-indent-offset 2
    web-mode-code-indent-offset 2
    web-mode-attr-indent-offset 2)
+
+  (defun purescript-unicodify ()
+    "Query replaces the current buffer for unicode substitutions"
+    (interactive)
+    (when (eq major-mode 'purescript-mode)
+      (save-excursion
+        (beginning-of-buffer)
+        (query-replace-regexp "->" "→")
+        (query-replace-regexp "<-" "←")
+        (query-replace-regexp "=>" "⇒")
+        (query-replace-regexp "forall" "∀")
+        (query-replace-regexp "::" "∷"))))
   )
 
 (defun dotspacemacs/user-config ()
